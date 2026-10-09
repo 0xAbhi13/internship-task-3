@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block t %}Reports{% endblock %}{% block c %}
+<h2>Reports</h2><div class="card"><form method="get"><div class="filters">
+<select name="status"><option value="">All statuses</option>{% for s in statuses %}<option {% if f.status==s %}selected{% endif %}>{{s}}</option>{% endfor %}</select>
+<input type="date" name="from" value="{{f.from}}"><input type="date" name="to" value="{{f.to}}">
+<button class="btn">Apply Filters</button>
+<a class="btn sec" href="{{ url_for('export_csv',status=f.status,**{'from':f.from,'to':f.to}) }}">⬇ Export CSV</a></div></form></div>
+<div class="card"><table><tr><th>ID</th><th>Student</th><th>Opportunity</th><th>Status</th><th>Applied</th></tr>
+{% for r in rows %}<tr><td>{{r['id']}}</td><td>{{r['student']}}</td><td>{{r['title']}} @ {{r['company']}}</td><td>{{r['status']}}</td><td>{{r['applied_at']}}</td></tr>
+{% else %}<tr><td colspan="5" class="muted">No results for these filters.</td></tr>{% endfor %}</table></div>{% endblock %}

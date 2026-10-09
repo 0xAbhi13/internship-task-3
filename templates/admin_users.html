@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block t %}Users{% endblock %}{% block c %}
+<h2>Manage Students</h2><div class="card"><table><tr><th>Name</th><th>Email</th><th>Role</th><th>Apps</th><th>Joined</th><th></th></tr>
+{% for u in users %}<tr><td>{{u['name']}}</td><td>{{u['email']}}</td><td><span class="badge">{{u['role']}}</span></td><td>{{u['napp']}}</td><td>{{u['created_at']}}</td>
+<td>{% if u['id']!=current_user['id'] %}<form method="post" action="{{ url_for('admin_user_delete',uid=u['id']) }}" data-confirm="Delete this user?"><input type="hidden" name="csrf_token" value="{{csrf_token}}"><button class="btn small danger">Delete</button></form>{% else %}<span class="muted">you</span>{% endif %}</td></tr>
+{% else %}<tr><td colspan="6" class="muted">No users.</td></tr>{% endfor %}</table></div>{% endblock %}

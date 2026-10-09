@@ -1,0 +1,19 @@
+:root{--bg:#0f172a;--card:#ffffff;--muted:#64748b;--pri:#2563eb;--pri2:#1e40af;--ok:#16a34a;--err:#dc2626;--line:#e2e8f0}
+*{box-sizing:border-box}body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:#f1f5f9;color:#0f172a}
+.nav{background:var(--bg);color:#fff;padding:.7rem 1rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.nav a{color:#cbd5e1;text-decoration:none;margin-right:.8rem}.nav a:hover{color:#fff}.brand{font-weight:700;color:#fff!important;font-size:1.05rem}
+.wrap{max-width:1080px;margin:0 auto;padding:1.2rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1.1rem;margin-bottom:1rem;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+.stat{font-size:2rem;font-weight:800}.muted{color:var(--muted)}.btn{display:inline-block;background:var(--pri);color:#fff;border:0;border-radius:8px;padding:.55rem .9rem;cursor:pointer;text-decoration:none}
+.btn:hover{background:var(--pri2)}.btn.sec{background:#475569}.btn.danger{background:var(--err)}.btn.small{padding:.3rem .6rem;font-size:.85rem}
+input,select,textarea{width:100%;padding:.55rem;border:1px solid var(--line);border-radius:8px;margin:.25rem 0 .7rem}
+label{font-weight:600;font-size:.9rem}table{width:100%;border-collapse:collapse}th,td{padding:.6rem;border-bottom:1px solid var(--line);text-align:left;font-size:.93rem}
+.flash{padding:.6rem .9rem;border-radius:8px;margin-bottom:.7rem}.flash.success{background:#dcfce7;color:#166534}.flash.error{background:#fee2e2;color:#991b1b}
+.badge{display:inline-block;padding:.15rem .55rem;border-radius:20px;font-size:.8rem;background:#e0e7ff;color:#3730a3}
+.filters{display:flex;gap:.6rem;flex-wrap:wrap}.filters>*{flex:1;min-width:140px}
+.hero{background:linear-gradient(120deg,#1e3a8a,#2563eb);color:#fff;border-radius:14px;padding:2rem;margin-bottom:1rem}
+.hero h1{margin:.2rem 0}.sample-note{background:#fef9c3;border:1px solid #fde047;padding:.5rem .8rem;border-radius:8px;font-size:.85rem}
+.resume{max-width:760px;margin:0 auto;background:#fff;border:1px solid var(--line);padding:2rem;border-radius:10px}
+@media(max-width:640px){.wrap{padding:.7rem}table{font-size:.82rem}.hero{padding:1.2rem}}
+@media print{.nav,.noprint{display:none!important}.wrap{max-width:100%}}

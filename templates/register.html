@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block t %}Register{% endblock %}{% block c %}
+<div class="card" style="max-width:520px;margin:auto"><h2>Student Registration</h2>
+<form method="post"><input type="hidden" name="csrf_token" value="{{csrf_token}}">
+<label>Name</label><input name="name" required minlength="2">
+<label>Email</label><input name="email" type="email" required>
+<label>Password (min 6)</label><input name="password" type="password" required minlength="6">
+<label>Confirm password</label><input name="confirm" type="password" required>
+<button class="btn">Register</button> <a href="{{ url_for('login') }}">Already have an account?</a></form>
+<p class="muted">First registered user becomes admin automatically.</p></div>{% endblock %}

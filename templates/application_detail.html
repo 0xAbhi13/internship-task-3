@@ -1,0 +1,11 @@
+{% extends "base.html" %}{% block t %}Application #{{a['id']}}{% endblock %}{% block c %}
+<div class="card"><h2>{{a['title']}} @ {{a['company']}}</h2>
+<p><span class="badge">{{a['status']}}</span> · Deadline {{a['deadline']}} · Applied {{a['applied_at']}}</p>
+<h4>Status history</h4><table><tr><th>From → To</th><th>By</th><th>Note</th><th>At</th></tr>
+{% for h in hist %}<tr><td>{{h['old_status'] or '—'}} → <b>{{h['new_status']}}</b></td><td>{{h['changer'] or '-'}}</td><td>{{h['note']}}</td><td>{{h['changed_at']}}</td></tr>
+{% else %}<tr><td colspan="4" class="muted">No history.</td></tr>{% endfor %}</table>
+{% if current_user and current_user['role']=='admin' %}
+<form method="post" action="{{ url_for('admin_app_status',aid=a['id']) }}"><input type="hidden" name="csrf_token" value="{{csrf_token}}">
+<label>Update status</label><select name="status">{% for s in ['Applied','Under Review','Shortlisted','Selected','Rejected'] %}<option {% if a['status']==s %}selected{% endif %}>{{s}}</option>{% endfor %}</select>
+<label>Note</label><input name="note" placeholder="optional note"><button class="btn">Update</button></form>{% endif %}
+<a class="btn sec" href="{{ url_for('applications') if current_user['role']!='admin' else url_for('admin_apps') }}">← Back</a></div>{% endblock %}

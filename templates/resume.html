@@ -1,0 +1,7 @@
+{% extends "base.html" %}{% block t %}Resume · {{user['name']}}{% endblock %}{% block c %}
+<div class="resume"><h1>{{user['name']}}</h1><p class="muted">{{prof['degree']}} · {{prof['college']}} ({{prof['grad_year']}}) · CGPA {{prof['cgpa']}}</p>
+<p>{{prof['phone']}} · {{user['email']}} · {{prof['address']}}</p>
+<p>{% if prof['linkedin'] %}LinkedIn: {{prof['linkedin']}} {% endif %}{% if prof['github'] %}· GitHub: {{prof['github']}}{% endif %}</p>
+<h3>Skills</h3><p>{% for s in myskills %}<span class="badge">{{s['name']}} ({{s['proficiency']}})</span> {% else %}<span class="muted">—</span>{% endfor %}</p>
+<h3>Interests</h3><p>{{prof['interests'] or '—'}}</p><h3>Summary</h3><p>{{prof['resume_text'] or '—'}}</p>
+<div class="noprint"><button class="btn" onclick="window.print()">🖨️ Print / Save PDF</button> <a class="btn sec" href="{{ url_for('profile') }}">Edit</a></div></div>{% endblock %}

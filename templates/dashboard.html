@@ -1,0 +1,12 @@
+{% extends "base.html" %}{% block t %}Dashboard{% endblock %}{% block c %}
+<h2>My Dashboard</h2><div class="grid">
+<div class="card"><div class="stat">{{total}}</div><div class="muted">Total applications</div></div>
+<div class="card"><div class="stat">{{under}}</div><div class="muted">Under review</div></div>
+<div class="card"><div class="stat">{{shorted}}</div><div class="muted">Shortlisted</div></div>
+<div class="card"><div class="stat">{{selected}}</div><div class="muted">Selected 🎉</div></div></div>
+<div class="grid"><div class="card"><h3>Upcoming deadlines</h3>{% for o in upcoming %}
+<p><a href="{{ url_for('opportunity_detail',oid=o['id']) }}"><b>{{o['title']}}</b></a><br><span class="muted">{{o['company']}} · {{o['deadline']}}</span></p>
+{% else %}<p class="muted">No upcoming deadlines. <a href="{{ url_for('opportunities') }}">Browse internships</a></p>{% endfor %}</div>
+<div class="card"><h3>Recent activity</h3>{% for a in recent %}
+<p><span class="badge">{{a['status']}}</span> {{a['title']}} @ {{a['company']}} <span class="muted">{{a['updated_at']}}</span></p>
+{% else %}<p class="muted">No applications yet.</p>{% endfor %}</div></div>{% endblock %}

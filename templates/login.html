@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% block t %}Login{% endblock %}{% block c %}
+<div class="card" style="max-width:480px;margin:auto"><h2>Login</h2>
+<form method="post"><input type="hidden" name="csrf_token" value="{{csrf_token}}">
+<input type="hidden" name="next" value="{{request.args.get('next','')}}">
+<label>Email</label><input name="email" type="email" required>
+<label>Password</label><input name="password" type="password" required>
+<button class="btn">Login</button> <a href="{{ url_for('register') }}">New here? Register</a></form>
+<p class="muted">Demo: admin@example.com / admin123 · student@example.com / student123 (after seeding).</p></div>{% endblock %}

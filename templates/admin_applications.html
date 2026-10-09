@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% block t %}Review Applications{% endblock %}{% block c %}
+<h2>Review Applications</h2><div class="card"><form method="get"><div class="filters">
+<select name="status"><option value="">All statuses</option>{% for s in statuses %}<option {% if fstatus==s %}selected{% endif %}>{{s}}</option>{% endfor %}</select>
+<button class="btn">Filter</button></div></form></div>
+<div class="card"><table><tr><th>ID</th><th>Student</th><th>Opportunity</th><th>Status</th><th>Applied</th><th></th></tr>
+{% for r in rows %}<tr><td>{{r['id']}}</td><td>{{r['student']}}<br><span class="muted">{{r['email']}}</span></td><td>{{r['title']}} @ {{r['company']}}</td><td><span class="badge">{{r['status']}}</span></td><td>{{r['applied_at']}}</td>
+<td><a class="btn small" href="{{ url_for('application_detail',aid=r['id']) }}">Review</a></td></tr>
+{% else %}<tr><td colspan="6" class="muted">No applications found.</td></tr>{% endfor %}</table></div>{% endblock %}

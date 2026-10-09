@@ -1,0 +1,10 @@
+{% extends "base.html" %}{% block t %}{{o['title']}}{% endblock %}{% block c %}
+<div class="card"><h2>{{o['title']}}</h2><p><b>{{o['company']}}</b> · {{o['location']}} · {{o['type']}} · {{o['mode']}}</p>
+<p>{% if o['paid'] %}💰 Paid: {{o['stipend']}}{% else %}Unpaid{% endif %} · Duration: {{o['duration']}} · Deadline: <b>{{o['deadline']}}</b> · <span class="badge">{{o['status']}}</span></p>
+<h4>Skills required</h4><p>{{o['skills_required']}}</p><h4>Eligibility</h4><p>{{o['eligibility']}}</p>
+<h4>Description</h4><p>{{o['description']}}</p><h4>How to apply</h4><p>{{o['instructions']}}</p>
+<div class="noprint">{% if current_user and current_user['role']=='student' %}
+{% if mine %}<p><span class="badge">{{mine['status']}}</span> You applied on {{mine['applied_at']}}. <a href="{{ url_for('application_detail',aid=mine['id']) }}">View application</a></p>
+{% else %}<a class="btn" href="{{ url_for('apply',oid=o['id']) }}">Apply Now</a>{% endif %}
+{% elif current_user and current_user['role']=='admin' %}<a class="btn" href="{{ url_for('admin_opp_edit',oid=o['id']) }}">Edit listing</a>{% endif %}
+<a class="btn sec" href="{{ url_for('opportunities') }}">← Back</a></div></div>{% endblock %}

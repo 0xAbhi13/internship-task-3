@@ -1,0 +1,28 @@
+{% extends "base.html" %}{% block t %}Profile{% endblock %}{% block c %}
+<h2>My Profile</h2><div class="grid"><div class="card">
+<h3>Education & Contact</h3><form method="post"><input type="hidden" name="csrf_token" value="{{csrf_token}}"><input type="hidden" name="action" value="profile">
+<label>Full name</label><input name="name" value="{{user['name']}}" required>
+<label>Phone</label><input name="phone" value="{{prof['phone']}}">
+<label>College</label><input name="college" value="{{prof['college']}}">
+<label>Degree</label><input name="degree" value="{{prof['degree']}}">
+<label>Grad year</label><input name="grad_year" value="{{prof['grad_year']}}">
+<label>CGPA</label><input name="cgpa" value="{{prof['cgpa']}}">
+<label>Interests</label><input name="interests" value="{{prof['interests']}}">
+<label>LinkedIn</label><input name="linkedin" value="{{prof['linkedin']}}">
+<label>GitHub</label><input name="github" value="{{prof['github']}}">
+<label>Address</label><input name="address" value="{{prof['address']}}">
+<label>Resume summary</label><textarea name="resume_text" rows="4">{{prof['resume_text']}}</textarea>
+<button class="btn">Save Profile</button> <a class="btn sec" href="{{ url_for('resume') }}">Preview Resume</a></form></div>
+<div><div class="card"><h3>Technical Skills</h3>
+{% for s in myskills %}<p><span class="badge">{{s['name']}} · {{s['proficiency']}}</span>
+<form method="post" style="display:inline"><input type="hidden" name="csrf_token" value="{{csrf_token}}"><input type="hidden" name="action" value="del_skill"><input type="hidden" name="skill_id" value="{{s['skill_id']}}"><button class="btn small danger">✕</button></form></p>
+{% else %}<p class="muted">No skills yet.</p>{% endfor %}
+<form method="post"><input type="hidden" name="csrf_token" value="{{csrf_token}}"><input type="hidden" name="action" value="add_skill">
+<label>Skill name</label><input name="skill_name" required placeholder="e.g. Python">
+<label>Proficiency</label><select name="proficiency"><option>Beginner</option><option>Intermediate</option><option>Advanced</option><option>Expert</option></select>
+<button class="btn">Add Skill</button></form></div>
+<div class="card"><h3>Resume file (PDF/DOC/TXT, ≤2MB)</h3>
+{% if prof['resume_file'] %}<p class="muted">Uploaded: {{prof['resume_file']}}</p>{% endif %}
+<form method="post" action="{{ url_for('upload_resume') }}" enctype="multipart/form-data"><input type="hidden" name="csrf_token" value="{{csrf_token}}">
+<input type="file" name="resume" accept=".pdf,.doc,.docx,.txt" required><button class="btn">Upload</button></form>
+<p class="muted">Files are validated, renamed server-side and never executed.</p></div></div></div>{% endblock %}

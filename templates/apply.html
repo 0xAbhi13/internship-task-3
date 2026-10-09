@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block t %}Apply{% endblock %}{% block c %}
+<div class="card" style="max-width:640px;margin:auto"><h2>Apply: {{o['title']}} @ {{o['company']}}</h2>
+<form method="post"><input type="hidden" name="csrf_token" value="{{csrf_token}}">
+<label>Cover letter (min 10 chars)</label><textarea name="cover_letter" rows="6" required placeholder="Why are you a good fit? Mention skills, projects..."></textarea>
+<button class="btn">Submit Application</button> <a class="btn sec" href="{{ url_for('opportunity_detail',oid=o['id']) }}">Cancel</a></form></div>{% endblock %}

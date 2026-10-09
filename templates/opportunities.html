@@ -1,0 +1,16 @@
+{% extends "base.html" %}{% block t %}Opportunities{% endblock %}{% block c %}
+<h2>Discover Internships</h2><div class="sample-note">Sample listings for training — not verified live vacancies.</div>
+<div class="card"><form method="get"><div class="filters">
+<input name="q" placeholder="Title / company" value="{{f.q}}">
+<input name="location" placeholder="Location" value="{{f.location}}">
+<input name="skill" placeholder="Skill" value="{{f.skill}}">
+<select name="type"><option value="">All types</option>{% for t in ['Internship','Placement','Trainee','Apprenticeship'] %}<option {% if f.type==t %}selected{% endif %}>{{t}}</option>{% endfor %}</select>
+<select name="mode"><option value="">All modes</option>{% for m in ['Remote','On-site','Hybrid'] %}<option {% if f.mode==m %}selected{% endif %}>{{m}}</option>{% endfor %}</select>
+<select name="paid"><option value="">Paid & Unpaid</option><option value="paid" {% if f.paid=='paid' %}selected{% endif %}>Paid only</option><option value="unpaid" {% if f.paid=='unpaid' %}selected{% endif %}>Unpaid only</option></select>
+</div><button class="btn">Search / Filter</button> <a class="btn sec" href="{{ url_for('opportunities') }}">Reset</a>
+{% if current_user and current_user['role']=='admin' %}<a class="btn" href="{{ url_for('admin_opp_new') }}">+ New Listing</a>{% endif %}</form></div>
+{% for o in rows %}<div class="card"><h3><a href="{{ url_for('opportunity_detail',oid=o['id']) }}">{{o['title']}}</a></h3>
+<p><b>{{o['company']}}</b> · {{o['location']}} · {{o['type']}} · {{o['mode']}} · {% if o['paid'] %}💰 {{o['stipend']}}{% else %}Unpaid{% endif %} · ⏳ {{o['deadline']}} · <span class="badge">{{o['status']}}</span></p>
+<p class="muted">Skills: {{o['skills_required']}} | {{o['duration']}}</p>
+{% if current_user and current_user['role']=='student' %}{% if o['id'] in applied %}<span class="badge">Already applied ✓</span>{% else %}<a class="btn small" href="{{ url_for('apply',oid=o['id']) }}">Apply</a>{% endif %}{% endif %}</div>
+{% else %}<div class="card"><p class="muted">No opportunities match your filters. Try clearing them.</p></div>{% endfor %}{% endblock %}

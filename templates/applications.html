@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block t %}My Applications{% endblock %}{% block c %}
+<h2>Application Tracking</h2>{% for a in rows %}<div class="card">
+<p><span class="badge">{{a['status']}}</span> <a href="{{ url_for('application_detail',aid=a['id']) }}"><b>{{a['title']}}</b></a> @ {{a['company']}}</p>
+<p class="muted">Applied {{a['applied_at']}} · Updated {{a['updated_at']}} · Deadline {{a['deadline']}}</p></div>
+{% else %}<div class="card"><p class="muted">No applications yet. <a href="{{ url_for('opportunities') }}">Find internships →</a></p></div>{% endfor %}{% endblock %}

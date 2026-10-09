@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block t %}Admin{% endblock %}{% block c %}
+<h2>Admin Dashboard</h2><div class="grid">
+<div class="card"><div class="stat">{{stats.students}}</div><div class="muted">Students</div></div>
+<div class="card"><div class="stat">{{stats.opps}}</div><div class="muted">Live listings</div></div>
+<div class="card"><div class="stat">{{stats.apps}}</div><div class="muted">Applications</div></div>
+<div class="card"><div class="stat">{{stats.selected}}</div><div class="muted">Selected</div></div></div>
+<div class="grid"><div class="card"><h3>By status</h3><table>{% for r in by_status %}<tr><td>{{r['status']}}</td><td><b>{{r['c']}}</b></td></tr>{% else %}<tr><td class="muted">No applications.</td></tr>{% endfor %}</table>
+<p><a class="btn" href="{{ url_for('admin_opp_new') }}">+ New Listing</a> <a class="btn sec" href="{{ url_for('admin_apps') }}">Review Applications</a></p></div>
+<div class="card"><h3>Recent applications</h3>{% for a in recent %}<p><span class="badge">{{a['status']}}</span> {{a['student']}} → {{a['title']}} <span class="muted">{{a['applied_at']}}</span></p>{% else %}<p class="muted">None.</p>{% endfor %}</div></div>{% endblock %}

@@ -1,0 +1,22 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{% block t %}Placement System{% endblock %}</title><link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}"></head>
+<body><nav class="nav">
+<a class="brand" href="{{ url_for('index') }}">🎓 PlacementPortal</a>
+{% if current_user %}
+  {% if current_user['role']=='admin' %}
+  <a href="{{ url_for('admin') }}">Admin</a><a href="{{ url_for('opportunities') }}">Opportunities</a>
+  <a href="{{ url_for('admin_apps') }}">Applications</a><a href="{{ url_for('reports') }}">Reports</a>
+  <a href="{{ url_for('admin_users') }}">Users</a>
+  {% else %}
+  <a href="{{ url_for('dashboard') }}">Dashboard</a><a href="{{ url_for('opportunities') }}">Find Internships</a>
+  <a href="{{ url_for('applications') }}">My Applications</a><a href="{{ url_for('profile') }}">Profile</a>
+  <a href="{{ url_for('resume') }}">Resume</a><a href="{{ url_for('reports') }}">Reports</a>
+  {% endif %}
+  <span class="muted">Hi, {{ current_user['name'] }} ({{ current_user['role'] }})</span>
+  <a href="{{ url_for('logout') }}">Logout</a>
+{% else %}
+  <a href="{{ url_for('opportunities') }}">Opportunities</a><a href="{{ url_for('login') }}">Login</a><a href="{{ url_for('register') }}">Register</a>
+{% endif %}
+</nav><div class="wrap">
+{% with m=get_flashed_messages(with_categories=true) %}{% for c,x in m %}<div class="flash {{c}}">{{x}}</div>{% endfor %}{% endwith %}
+{% block c %}{% endblock %}</div><script src="{{ url_for('static',filename='app.js') }}"></script></body></html>

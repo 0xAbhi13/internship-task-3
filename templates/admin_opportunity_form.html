@@ -1,0 +1,18 @@
+{% extends "base.html" %}{% block t %}{% if mode2=='new' %}New Listing{% else %}Edit Listing{% endif %}{% endblock %}{% block c %}
+<div class="card" style="max-width:700px;margin:auto"><h2>{% if mode2=='new' %}New Opportunity{% else %}Edit #{{o['id']}}{% endif %}</h2>
+<form method="post"><input type="hidden" name="csrf_token" value="{{csrf_token}}">
+<label>Title*</label><input name="title" value="{{d.get('title','')}}" required>
+<label>Company*</label><input name="company" value="{{d.get('company','')}}" required>
+<label>Location</label><input name="location" value="{{d.get('location','')}}">
+<label>Type</label><select name="type">{% for t in ['Internship','Placement','Trainee','Apprenticeship'] %}<option {% if d.get('type')==t %}selected{% endif %}>{{t}}</option>{% endfor %}</select>
+<label>Mode</label><select name="mode">{% for m in ['Remote','On-site','Hybrid'] %}<option {% if d.get('mode')==m %}selected{% endif %}>{{m}}</option>{% endfor %}</select>
+<label><input type="checkbox" name="paid" value="1" {% if d.get('paid',1) %}checked{% endif %} style="width:auto"> Paid?</label>
+<label>Stipend</label><input name="stipend" value="{{d.get('stipend','')}}">
+<label>Duration</label><input name="duration" value="{{d.get('duration','')}}">
+<label>Skills required</label><input name="skills_required" value="{{d.get('skills_required','')}}">
+<label>Eligibility</label><textarea name="eligibility" rows="2">{{d.get('eligibility','')}}</textarea>
+<label>Description</label><textarea name="description" rows="4">{{d.get('description','')}}</textarea>
+<label>Application instructions</label><textarea name="instructions" rows="2">{{d.get('instructions','')}}</textarea>
+<label>Deadline (YYYY-MM-DD)*</label><input name="deadline" type="date" value="{{d.get('deadline','')}}" required>
+<label>Status</label><select name="status">{% for s in ['published','draft','archived'] %}<option {% if d.get('status')==s %}selected{% endif %}>{{s}}</option>{% endfor %}</select>
+<button class="btn">Save</button></form></div>{% endblock %}

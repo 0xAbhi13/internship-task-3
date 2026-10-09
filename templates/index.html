@@ -1,0 +1,12 @@
+{% extends "base.html" %}{% block t %}Home · PlacementPortal{% endblock %}{% block c %}
+<div class="hero"><h1>Student Internship & Placement Management System</h1>
+<p>Discover internships, track applications, build skills and monitor placement preparation — all in one portal.</p>
+{% if not current_user %}<a class="btn" href="{{ url_for('register') }}">Get Started</a> <a class="btn sec" href="{{ url_for('login') }}">Login</a>
+{% else %}<a class="btn" href="{{ url_for('dashboard') if current_user['role']!='admin' else url_for('admin') }}">Go to Dashboard</a>{% endif %}</div>
+<div class="grid"><div class="card"><div class="stat">{{count_opp}}</div><div class="muted">Live opportunities</div></div>
+<div class="card"><div class="stat">{{count_stu}}</div><div class="muted">Registered students</div></div>
+<div class="card"><div class="stat">{{count_app}}</div><div class="muted">Applications tracked</div></div></div>
+<div class="card"><h3>Featured opportunities <span class="muted">(sample listings for training)</span></h3>
+{% for o in featured %}<p><a href="{{ url_for('opportunity_detail',oid=o['id']) }}"><b>{{o['title']}}</b></a> — {{o['company']}} · {{o['location']}} · {{o['mode']}} · Deadline {{o['deadline']}}</p>{% else %}<p class="muted">No live opportunities yet.</p>{% endfor %}</div>
+<div class="sample-note">⚠️ Sample opportunities are clearly labelled and are for training/testing — not verified live vacancies.</div>
+{% endblock %}
