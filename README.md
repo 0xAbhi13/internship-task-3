@@ -142,6 +142,4 @@ Copy `.env.example` → `.env` and set `SECRET_KEY`. Ignored by git: `*.db`, `up
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=120&section=footer" alt="footer"/>
 
-⭐ Star the repo after you push it · Replace with your real link — never commit secrets ⭐
-
 </div>
